@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <string.h>
-
+#include <locale.h>
 int z_1 ();
+int z_1a ();
 int cou(long long num);
 int pz1(long long num);
 int pz2(long long num);
@@ -12,17 +13,19 @@ int pz6(long long num);
 long long pz7(long long num);
 long long pz8(long long num, int count); 
 int pz9(long long num);      
-void pz10(long long num);    
+int pz10(long long num);    
 int pz11(long long num, int count); 
 long long pz12(long long num);
 
 
 int main (){
+setlocale(LC_ALL, "Russian");
+    //задание 1
+    printf("--- Задание 1 ---\n >>таблица умножения\n");
 
-    // //задание 1
-    // printf("--- Задание 1 ---\n");
-    // int i,j;
-    // z_1();
+    z_1();
+    printf(">>левая лижняя часть\n");
+    z_1a();
 
     char repeat; // Переменная для повтора
 printf("\n--- Задание 2 ---\n");
@@ -40,15 +43,15 @@ printf("\n--- Задание 2 ---\n");
     //пз 2
         int count_last=pz2(num); //последнее чсило повторяется...
         printf("\n2. последняя цифра повторяется %d раз(а)",count_last);
-    //пз 2
+    //пз 3
         int chet=pz3(num); //четные
         printf("\n3. кол-во четных чисел: %d",chet);
     //пз 4
         int count5=pz4(num); //числа больше 5
         printf("\n4. кол-во чисел > 5: %d",count5);
     //пз 5
-        int sum=pz5(num); //сумма четных
-        printf("\n5. сумма четных: %d",sum);
+        int sum=pz5(num); //сумма нечетных
+        printf("\n5. сумма нечетных: %d",sum);
 
         //пз 6;
         int sum_ge_7 = pz6(num);
@@ -72,8 +75,10 @@ printf("\n--- Задание 2 ---\n");
 
         // пз 10
         printf("\n10. пары одинаковых рядом: ");
-        pz10(num);
-
+       int found = pz10(num); 
+        if (found == 0) {
+            printf("нет одинаковых рядом стоящих цифр"); 
+        }
         //  пз 11
         if (count % 2 == 0) {
             if (pz11(num, count) == 1) printf("\n11. суммы половин РАВНЫ");
@@ -95,12 +100,18 @@ printf("\n--- Задание 2 ---\n");
     printf("\nПрограмма завершена.\n"); 
     return 0;
 }
-
-int z_1(){
+int z_1a(){
     for (int i=1;i<=9;i++) {
         for (int j=1;j<=9;j++) {
             printf("%4d",i*j);
             if (j>=i) break;
+        }
+        printf("\n");}}
+int z_1(){
+    for (int i=1;i<=9;i++) {
+        for (int j=1;j<=9;j++) {
+            printf("%4d",i*j);
+
         }
         printf("\n");
     }
@@ -229,20 +240,20 @@ int pz9(long long num) {
     return sum;
 }
 
-void pz10(long long num) { 
+int pz10(long long num) { 
     long long i = num;
     int prev = -1;
     int found = 0;
     while (i > 0) {
         int d = i % 10;
         if (d == prev) {
-            printf("%d%d ", d, prev);
+            printf("%d%d ", d, prev); 
             found = 1;
         }
         prev = d;
         i = i / 10;
     }
-    if (found == 0) printf("нет одинаковых рядом стоящих цифр");
+    return found; 
 }
 
 int pz11(long long num, int count) { 

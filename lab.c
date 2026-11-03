@@ -75,7 +75,7 @@ printf("\n--- Задание 2 ---\n");
 
         // пз 10
         printf("\n10. пары одинаковых рядом: ");
-       int found = pz10(num); 
+        int found = pz10(num); 
         if (found == 0) {
             printf("нет одинаковых рядом стоящих цифр"); 
         }
@@ -106,7 +106,10 @@ int z_1a(){
             printf("%4d",i*j);
             if (j>=i) break;
         }
-        printf("\n");}}
+        printf("\n");
+    }
+    return 0;
+}
 int z_1(){
     for (int i=1;i<=9;i++) {
         for (int j=1;j<=9;j++) {
@@ -129,6 +132,7 @@ int z_1(){
 
 int cou(long long num){
             //узнаем кол-во цифр
+    if (num == 0) return 1;
     long long i = num;
     int n = 0;
     while (i > 0) {
@@ -153,6 +157,7 @@ int pz2(long long num){
     int last = num % 10;
     int count_last = 0;
     long long i = num;
+    if (i == 0) return 1;
     while (i > 0) {
         if (i % 10 == last) count_last++;
         i = i / 10;
@@ -163,6 +168,7 @@ int pz2(long long num){
 int pz3(long long num){
     int chet = 0;
     long long i = num;
+    if (i == 0) return 1;
     while (i > 0) {
         if ((i % 10) % 2 == 0) chet++;
         i = i / 10;
@@ -209,6 +215,7 @@ int pz6(long long num) {
 long long pz7(long long num) { // 7. Произведение без 0
     long long prod = 1;
     long long i = num;
+    if (i == 0) return 1;
     while (i > 0) {
         int d = i % 10;
         if (d != 0) prod *= d;

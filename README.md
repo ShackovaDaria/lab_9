@@ -19,11 +19,13 @@
    - Спрашиваем, хочет ли пользователь продолжить. Если введен `0` — выходим из цикла.
 4. **Конец**.
 ### Блок-схема
-<img width="952" height="1921" alt="дз9 drawio (1)" src="https://github.com/user-attachments/assets/6295d1a2-16af-4e17-801c-5cd82351939a" />
+<img width="921" height="2700" alt="дз9 drawio (2)" src="https://github.com/user-attachments/assets/37a843bc-80c5-411c-8f8f-db89b8e66b78" />
 
 ```c
 #include <stdio.h>
 #include <locale.h>
+
+char get_symbol(char sim, int i, int j, int h);
 
 int main() {
     int h, i, j;
@@ -42,11 +44,8 @@ int main() {
         } else {
             printf("Фигура:\n");
             for (i = 1; i <= h; i++) {
-                for (j = 0; j < h - i; j++) {
-                    printf(" ");
-                }
-                for (j = 0; j < 2 * i - 1; j++) {
-                    printf("%c", sim);
+                for (j = 0; j < 2 * h - 1; j++) {
+                    printf("%c", get_symbol(sim, i, j, h));
                 }
                 printf("\n");
             }
@@ -58,6 +57,19 @@ int main() {
     } while (cont != '0');
 
     return 0;
+}
+char get_symbol(char sim, int i, int j, int h) {
+    // i - текущая строка (от 1 до h)
+    // j - текущая позиция в строке (от 0 до 2*h-2)
+    
+    int start_pos = h - i;
+    int end_pos = h - i + 2 * i - 1;
+    
+    if (j >= start_pos && j < end_pos) {
+        return sim;
+    } else {
+        return ' '; 
+    }
 }
 ```
 ## 3. Результаты работы программы
